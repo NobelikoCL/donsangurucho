@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Don Sangurucho - Carrito{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Tu Carrito</h2>
+    <div id="carritoCompleto"></div>
+    <a href="{% url 'checkout' %}" class="btn btn-success">Proceder al Pago</a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let carritoCompleto = document.getElementById('carritoCompleto');
+    carritoCompleto.innerHTML = '';
+    let total = 0;
+    carrito.forEach(item => {
+        let subtotal = item.precio * item.cantidad;
+        total += subtotal;
+        carritoCompleto.innerHTML += `
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span>${item.nombre} x ${item.cantidad}</span>
+                <span>$${subtotal}</span>
+            </div>
+        `;
+    });
+    carritoCompleto.innerHTML += `<hr><div class="d-flex justify-content-between"><strong>Total:</strong><strong>$${total}</strong></div>`;
+});
+</script>
+{% endblock %}

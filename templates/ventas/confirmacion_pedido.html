@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Confirmación de Pedido</h2>
+    <p>Tu pedido ha sido confirmado con éxito.</p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Detalles del Pedido</h5>
+            <p><strong>Número de Pedido:</strong> {{ pedido.numero_pedido }}</p>
+            <p><strong>Fecha de Pedido:</strong> {{ pedido.fecha|date:"d/m/Y H:i" }}</p>
+            <p><strong>Fecha de Confirmación:</strong> {{ pedido.fecha_confirmacion|date:"d/m/Y H:i" }}</p>
+            <h6>Productos:</h6>
+            <ul>
+                {% for detalle in detalles %}
+                <li>{{ detalle.producto.nombre }} - Cantidad: {{ detalle.cantidad }} - Subtotal: ${{ detalle.subtotal }}</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Total:</strong> ${{ pedido.total }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
